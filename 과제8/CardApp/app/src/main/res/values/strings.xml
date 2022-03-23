@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CardApp</string>
+    <string name ="RESTART">Restart</string>
+    <string name ="restart_alert_msg">Do you really want to restart the game?</string>
+    <string name ="yes">Yes</string>
+    <string name ="no">No</string>
+    <string name="flips_for">Flips %d</string>
+    <string name="same_card">SameCard</string>
+</resources>
