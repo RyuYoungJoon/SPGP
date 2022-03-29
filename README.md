@@ -8,9 +8,12 @@ Strikers 1945
 
 종 스크롤 슈팅게임
 
-#예상 게임 흐름
+## 예상 게임 흐름
 
 ![image](https://user-images.githubusercontent.com/74610708/160641587-93145fc6-e545-499e-9a22-52c09fcc749c.png)
+
+
+### 개발 범위
 
 
 
