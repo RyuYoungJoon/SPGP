@@ -25,13 +25,15 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     protected float dy;
     protected RectF boundingBox = new RectF();
     protected static int[] bitmapIds = {
-            R.mipmap.enemy_01,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
+            R.mipmap.enemy_02,R.mipmap.enemy_02,R.mipmap.enemy_03,R.mipmap.enemy_04,R.mipmap.enemy_05,
             R.mipmap.enemy_06,R.mipmap.enemy_07,R.mipmap.enemy_08,R.mipmap.enemy_09,R.mipmap.enemy_10,
             R.mipmap.enemy_11,R.mipmap.enemy_12,R.mipmap.enemy_13,R.mipmap.enemy_14,R.mipmap.enemy_15,
             R.mipmap.enemy_16,R.mipmap.enemy_17,R.mipmap.enemy_18,R.mipmap.enemy_19,R.mipmap.enemy_20,
     };
     public static final int MIN_LEVEL = 1;
     public static final int MAX_LEVEL = bitmapIds.length;
+    private float elapsedTimeForFire;
+    private float fireInterval = 1.0f / 10;
 
     //    protected static ArrayList<Enemy> recycleBin = new ArrayList<>();
     public static Enemy get(int level, float x, float speed) {
@@ -66,6 +68,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
                 size * 0.9f
         );
         gauge.setValue(1.0f);
+        fireInterval = Metrics.floatValue(R.dimen.fighter_fire_interval);
         Log.d(TAG, "Created: " + this);
     }
 
@@ -75,9 +78,15 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
 
         float frameTime = BaseGame.getInstance().frameTime;
         y += dy * frameTime;
+        elapsedTimeForFire = frameTime;
+        if (elapsedTimeForFire >= fireInterval) {
+            fire();
+            elapsedTimeForFire -= fireInterval;
+        }
         setDstRectWithRadius();
         boundingBox.set(dstRect);
         boundingBox.inset(size/16, size/16);
+
         if (dstRect.top > Metrics.height) {
             BaseGame.getInstance().remove(this);
             //recycleBin.add(this);
@@ -110,6 +119,13 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
 
         gauge.setValue((float)life / maxLife);
         return false;
+    }
+
+    public void fire() {
+        MainGame game = MainGame.get();
+        float power = 0.2f;
+        Bullet bullet = Bullet.get(x, y, power);
+        game.add(MainGame.Layer.bullet, bullet);
     }
 
 }

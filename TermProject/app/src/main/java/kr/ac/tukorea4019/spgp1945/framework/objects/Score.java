@@ -21,6 +21,7 @@ public class Score implements GameObject {
     private int score;
     private int displayScore;
 
+
     //    public Score() {
 //        this.bitmap = BitmapPool.get(R.mipmap.number_24x32);
 //        this.right = Metrics.width - Metrics.size(R.dimen.score_margin_right);
