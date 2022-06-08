@@ -1,6 +1,4 @@
 package kr.ac.tukorea4019.spgp1945.game;
-
-
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -16,8 +14,7 @@ import kr.ac.tukorea4019.spgp1945.framework.interfaces.Recyclable;
 import kr.ac.tukorea4019.spgp1945.framework.game.RecycleBin;
 
 import kr.ac.tukorea4019.spgp1945.framework.res.BitmapPool;
-
-public class Bullet implements GameObject,BoxCollidable,Recyclable {
+public class EnemyBullet implements GameObject,BoxCollidable,Recyclable {
     private static final String TAG = Bullet.class.getSimpleName();
     protected float x, y;
     protected final float length;
@@ -29,22 +26,22 @@ public class Bullet implements GameObject,BoxCollidable,Recyclable {
     protected static float laserWidth;
 
     //    protected static ArrayList<Bullet> recycleBin = new ArrayList<>();
-    public static Bullet get(float x, float y, float power) {
-        Bullet bullet = (Bullet) RecycleBin.get(Bullet.class);
+    public static EnemyBullet get(float x, float y, float power) {
+        EnemyBullet bullet = (EnemyBullet) RecycleBin.get(EnemyBullet.class);
         if (bullet != null) {
 //            Bullet bullet = recycleBin.remove(0);
 //            Log.d(TAG, "Recycle: " + recycleBin.size() + " bullets");
             bullet.set(x, y, power);
             return bullet;
         }
-        return new Bullet(x, y, power);
+        return new EnemyBullet(x, y, power);
     }
     private void set(float x, float y, float power) {
         this.x = x;
         this.y = y;
         this.power = power;
     }
-    private Bullet(float x, float y, float power) {
+    private EnemyBullet(float x, float y, float power) {
         this.x = x;
         this.y = y;
         this.power = power;
@@ -94,6 +91,4 @@ public class Bullet implements GameObject,BoxCollidable,Recyclable {
     public float getPower() {
         return power;
     }
-
-
 }

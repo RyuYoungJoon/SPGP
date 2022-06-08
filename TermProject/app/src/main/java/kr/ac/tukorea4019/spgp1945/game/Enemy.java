@@ -19,7 +19,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public static final float FRAMES_PER_SECOND = 10.0f;
     private static final String TAG = Enemy.class.getSimpleName();
     public static float size;
-    protected int level;
+    //protected int level;
     protected float life, maxLife;
     protected Gauge gauge;
     protected float dy;
@@ -31,7 +31,9 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
             R.mipmap.enemy_16,R.mipmap.enemy_17,R.mipmap.enemy_18,R.mipmap.enemy_19,R.mipmap.enemy_20,
     };
     public static final int MIN_LEVEL = 1;
+
     public static final int MAX_LEVEL = bitmapIds.length;
+    public static int level;
     private float elapsedTimeForFire;
     private float fireInterval = 1.0f / 10;
 
@@ -75,7 +77,6 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     @Override
     public void update() {
 //        super.update();
-
         float frameTime = BaseGame.getInstance().frameTime;
         y += dy * frameTime;
         elapsedTimeForFire = frameTime;
@@ -124,7 +125,7 @@ public class Enemy extends AnimSprite implements BoxCollidable, Recyclable {
     public void fire() {
         MainGame game = MainGame.get();
         float power = 0.2f;
-        Bullet bullet = Bullet.get(x, y, power);
+        Bullet bullet = Bullet.get(x, -y, 0.f);
         game.add(MainGame.Layer.bullet, bullet);
     }
 

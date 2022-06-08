@@ -22,7 +22,7 @@ public class MainGame extends BaseGame {
         return (MainGame)singleton;
     }
     public enum Layer {
-        bg1, bullet, enemy, player, bg2, ui, controller, COUNT
+        bg1, bullet, enemy, player, bg2, ui, controller, COUNT, enemybullet
     }
     private Fighter fighter;
 
